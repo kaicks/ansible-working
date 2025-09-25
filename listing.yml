@@ -7,7 +7,6 @@
             state: directory
             mode: '0755'
         - ansible.builtin.command: ls -l /home/ansible/lab-error-handling/transaction_list
-        - register: command_output
         - debug: msg="File Listed"
       rescue:
         - debug: msg="File does not exist.  Try again later."
