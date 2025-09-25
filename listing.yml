@@ -6,8 +6,8 @@
             path: /home/ansible/lab-error-handling
             state: directory
             mode: '0755'
-        - command: "{{ls /home/ansible/lab-error-handling/transaction_list}}"
-        - shell: "{{cat /home/ansible/lab-error-handling/transaction_list}}"
+        - ansible.builtin.command: ls -l /home/ansible/lab-error-handling/transaction_list
+        - register: command_output
         - debug: msg="File Listed"
       rescue:
         - debug: msg="File does not exist.  Try again later."
