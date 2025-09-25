@@ -1,0 +1,15 @@
+- hosts: all
+  tasks:
+    - name: List File exists
+      block:
+        - file:
+            path: /home/ansible/lab-error-handling
+            state: directory
+            mode: '0755'
+        - command: "{{ls /home/ansible/lab-error-handling/transaction_list}}"
+        - shell: "{{cat /home/ansible/lab-error-handling/transaction_list}}"
+        - debug: msg="File Listed"
+      rescue:
+        - debug: msg="File does not exist.  Try again later."
+      always:
+        - debug: msg="Attempt completed."
