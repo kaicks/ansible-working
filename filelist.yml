@@ -1,9 +1,12 @@
 - hosts: all
   tasks:
-    - name: List File exists on the server
-        ansible.builtin.command: ls -l "{{ survey_variable_name }}"
-        register: command_output
-    - name: Show command output
-        ansible.builtin.debug:
-        msg: "{{ command_output.stdout }}
-   
+    - name: Display the survey variable
+          debug:
+            msg: "The value from the survey is: {{ survey_variable_name }}"
+#    - name: List File exists on the server
+#        ansible.builtin.command: ls "{{  survey_variable_name }}"
+#        register: command_output
+#    - name: Show command output
+#        ansible.builtin.debug:
+#        msg: "{{ command_output.stdout }}
+ 
