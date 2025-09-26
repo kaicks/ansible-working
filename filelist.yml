@@ -4,3 +4,9 @@
     - name: Example Playbook using Survey Variable
       debug:
         msg: "The value from the survey is: {{ survey_variable_name }}"
+    - name: Run a simple command
+        ansible.builtin.command: ls -l {{ survey_variable_name }}
+        register: command_output
+    - name: Show command output
+        ansible.builtin.debug:
+        msg: "{{ command_output.stdout }}"
