@@ -1,7 +1,6 @@
-    ---
+---
+ - hosts: all
+   tasks:
     - name: Example Playbook using Survey Variable
-      hosts: all
-      tasks:
-        - name: Display the survey variable
-          debug:
-            msg: "The value from the survey is: {{ survey_variable_name }}"
+      debug:
+        msg: "The value from the survey is: {{ survey_variable_name }}"
