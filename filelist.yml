@@ -1,12 +1,20 @@
 ---
- - hosts: all
-   tasks:
-    - name: Example Playbook using Survey Variable
-      debug:
-        msg: "The value from the survey is: {{ survey_variable_name }}"
-    - name: Run a simple command
-        ansible.builtin.command: ls -l {{ survey_variable_name }}
-        register: command_output
-    - name: Show command output
-        ansible.builtin.debug:
-        msg: "{{ command_output.stdout }}"
+- name: Check file existence on host
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Get file status
+      ansible.builtin.stat:
+        path: "{{ file_path_survey }}"  # This variable will be populated by the survey
+      register: file_status
+
+    - name: Report file existence
+      ansible.builtin.debug:
+        msg: "File '{{ file_path_survey }}' exists on {{ inventory_hostname }}"
+      when: file_status.stat.exists
+
+    - name: Report file non-existence
+      ansible.builtin.debug:
+        msg: "File '{{ file_path_survey }}' does NOT exist on {{ inventory_hostname }}"
+      when: not file_status.stat.exists
