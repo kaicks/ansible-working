@@ -1,0 +1,11 @@
+- hosts: all
+  tasks:
+    - name: List File exists on the server
+      block:
+            msg: "The value from the survey is: {{ survey_variable_name }}"
+            - ansible.builtin.command: ls -l {{ survey_variable_name }}
+        - debug: msg="File Listed as per {{ survey_variable_name }} exists on the hosts"
+      rescue:
+        - debug: msg="File does not exist on the server.  Try again later."
+      always:
+        - debug: msg="Attempt completed."
